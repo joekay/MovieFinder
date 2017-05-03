@@ -1,0 +1,10 @@
+.movie-list {
+  flex: 8;
+  overflow-y: auto;
+}
+
+.movie-list > span {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
