@@ -1,6 +1,8 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 
 import Header from './Header';
 import MovieList from './MovieList';
@@ -12,7 +14,7 @@ type State = {
   searchbarInput: string,
 };
 
-class App extends Component {
+class App extends React.Component {
 
   // initial state
   state: State = {
@@ -21,7 +23,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     Api.getList(1).then((result: ApiResponse) => {
       this.setState((prevState: State) => ({
         items: result.results,
@@ -33,19 +34,27 @@ class App extends Component {
     this.setState({ searchbarInput: event.target.value });
   }
 
-  render(): React.Element<*> {
-    const filteredItems = this.state.items.filter(item => {
+  render () {
+
+  	const filteredItems = this.state.items.filter(item => {
       return item.title.toLowerCase().indexOf(this.state.searchbarInput) >= 0;
-    })
+    });
 
-    return (
+  	return (
+
       <div className="container">
-        
-        <Header onSearchbarChange={this.onSearchbarChange} />
-        <MovieList items={filteredItems} />
+      
+      <Header onSearchbarChange={this.onSearchbarChange} />
+      <MovieList items={filteredItems} />
       </div>
-    );
-  }
-}
 
-export default App;
+
+      )
+
+
+
+    }
+
+  }
+
+  export default App;

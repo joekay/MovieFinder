@@ -1,5 +1,6 @@
 .searchbar {
 
+flex: 1;
   background-color: transparent;
   border: 1px solid white;
   padding: 0.5rem;
@@ -7,7 +8,7 @@
   color: white;
   font-size: 1.0rem;
   font-weight: bold;
-  align-self: stretch;
+  width: 300pt;
 
 }
 
