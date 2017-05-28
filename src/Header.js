@@ -7,7 +7,7 @@ import './css/Header.css';
 const Searchbar: () => React.Element<*> = ({ onChange }) => (
   <input
     className="searchbar" 
-    placeholder="Sök film"
+    placeholder="Filter movies"
     onChange={onChange} />
 );
 

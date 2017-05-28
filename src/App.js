@@ -1,9 +1,6 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
-
 import Header from './Header';
 import MovieList from './MovieList';
 import Api from './Api';
@@ -23,7 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    Api.getList(1).then((result: ApiResponse) => {
+    Api.getList().then((result: ApiResponse) => {
       this.setState((prevState: State) => ({
         items: result.results,
       }))
@@ -41,6 +38,8 @@ class App extends React.Component {
     });
 
   	return (
+
+
 
       <div className="container">
       

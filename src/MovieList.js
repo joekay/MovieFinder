@@ -2,7 +2,6 @@
 
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-var ReactBootstrap = require('react-bootstrap');
 //import Modal from 'react-modal';
 //var Button = ReactBootstrap.Button
 import MovieItem from './MovieItem';
@@ -14,23 +13,12 @@ import './css/MovieItem.css';
 const generateImageName = (url: string) =>
 `https://image.tmdb.org/t/p/w370${url}`
 
-const movies = [];
+var movies = [];
 
 class MovieList extends React.Component {
 
   componentWillReceiveProps(props){
     movies = props.items;
-  }
-
-  constructor(props)
-  {
-    super(props);
-    this.state={open:false};
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick()
-  {
-    this.setState({open:true});
   }
 
   render() {
@@ -47,6 +35,9 @@ class MovieList extends React.Component {
         key={item.id}
         name={item.title}
         image={generateImageName(item.poster_path)}
+        overview={item.overview}
+        keyy={item.id}
+        //LÄGGA TILL YOOUTUBE LÄNK HÄR
         />
 
         ))}
