@@ -2,13 +2,16 @@
 
 flex: 1;
   background-color: transparent;
-  border: 1px solid white;
-  padding: 0.5rem;
-  padding-left: 0.75rem;
+  border: 0.1px solid white;
+  padding: 0.3rem;
+  padding-left: 0.5rem;
   color: white;
-  font-size: 1.0rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  width: 300pt;
-
+  width: 250pt;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  font-style: verdana;
 }
 

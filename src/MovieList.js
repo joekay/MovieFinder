@@ -33,10 +33,13 @@ class MovieList extends React.Component {
       {movies.map(item => (
         <MovieItem
         key={item.id}
+        item={item}
         name={item.title}
         image={generateImageName(item.poster_path)}
         overview={item.overview}
         keyy={item.id}
+        addFavorite={this.props.onStarClick}
+        isFavorite={item.isFavorite}
         //LÄGGA TILL YOOUTUBE LÄNK HÄR
         />
 

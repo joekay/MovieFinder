@@ -49,25 +49,32 @@ class MovieItem extends React.Component {
 
   render(){
 
-    
       hej = this.state.trailers[0];
-    
-
     
     //Undefined 20 gånger först
     console.log(hej);
 
+
+    if(this.props.isFavorite){
+      var starStyle = { backgroundImage : "url(./starFilled.svg)" }
+    } else {
+      var starStyle = { backgroundImage : "url(./star.svg)" }
+    }
+      
+
+
     return(
-
-
 
       <div 
       className="movie-item"
       style={{ backgroundImage: `url(${this.props.image})`}}
-      onClick={this.handleOpenModal}
+      onClick={(e)=>{ if(e.target.className != "favBtn") this.handleOpenModal() }}
       >
-        <Modal 
-          isOpen={this.state.isOpen}
+        <div 
+          style={starStyle}         
+          className="favBtn"
+          onClick={(e)=>{this.props.addFavorite(this.props.item)}} />
+        <Modal isOpen={this.state.isOpen}
           style={customStyles}
           contentLabel="Popup"
         >
@@ -77,16 +84,15 @@ class MovieItem extends React.Component {
           <iframe title="YouTube video player" className="youtube-player" type="text/html" 
           width="640" height="390" src="http://www.youtube.com/embed/${trailerObject.key}"
           frameBorder="0" allowFullScreen></iframe>
-
+          
+          <p>{this.props.name}</p>
           <button onClick={this.handleOpenModal}>close</button>
 
         </Modal>
 
       </div>
-
       )
   }
-
 }
 
 export default MovieItem;
