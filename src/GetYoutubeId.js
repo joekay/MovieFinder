@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-
-//import type { ApiResponse } from './types';
-
 var api_key = 'a4feaf23d50b0dac861819b44aecf721';
 
 const GetYoutubeId = {

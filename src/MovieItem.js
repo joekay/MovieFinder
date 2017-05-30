@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
 import GetYoutubeId from './GetYoutubeId';
@@ -16,14 +15,12 @@ const customStyles = {
   }
 };
 
+// Not yet functional
 type State = {
   trailers: Array<Item>
 };
 
-
-const hej = [];
-var hej1 = [];
-
+//var test = [];
 
 class MovieItem extends React.Component {
 
@@ -34,6 +31,7 @@ class MovieItem extends React.Component {
 
   componentDidMount() {
 
+    // We are getting trailer info from another API call but cannot extract Youtube ID
     GetYoutubeId.getTrailers(this.props.keyy).then((result: ApiResponse) => {
       this.setState((prevState: State) => ({
         trailers: result.results
@@ -42,23 +40,22 @@ class MovieItem extends React.Component {
 
   }
 
-
+  // Toggle for Modal window
   handleOpenModal = toggle => {
     this.setState({ isOpen: !this.state.isOpen });
   }
 
   render(){
 
-      hej = this.state.trailers[0];
-    
-    //Undefined 20 gånger först
-    console.log(hej);
+    //test = this.state.trailers[0];
+    //console.log(test);
 
-
+    // Styling for the little star in the corner of each movie
+    var starStyle = [];
     if(this.props.isFavorite){
-      var starStyle = { backgroundImage : "url(./starFilled.svg)" }
+      starStyle = { backgroundImage : "url(./starFilled.svg)" }
     } else {
-      var starStyle = { backgroundImage : "url(./star.svg)" }
+      starStyle = { backgroundImage : "url(./star.svg)" }
     }
       
 
@@ -68,7 +65,7 @@ class MovieItem extends React.Component {
       <div 
       className="movie-item"
       style={{ backgroundImage: `url(${this.props.image})`}}
-      onClick={(e)=>{ if(e.target.className != "favBtn") this.handleOpenModal() }}
+      onClick={(e)=>{ if(e.target.className !== "favBtn") this.handleOpenModal() }}
       >
         <div 
           style={starStyle}         
@@ -85,7 +82,6 @@ class MovieItem extends React.Component {
           width="640" height="390" src="http://www.youtube.com/embed/${trailerObject.key}"
           frameBorder="0" allowFullScreen></iframe>
           
-          <p>{this.props.name}</p>
           <button onClick={this.handleOpenModal}>close</button>
 
         </Modal>

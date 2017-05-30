@@ -13,13 +13,7 @@ import './css/MovieItem.css';
 const generateImageName = (url: string) =>
 `https://image.tmdb.org/t/p/w370${url}`
 
-var movies = [];
-
 class MovieList extends React.Component {
-
-  componentWillReceiveProps(props){
-    movies = props.items;
-  }
 
   render() {
 
@@ -30,7 +24,7 @@ class MovieList extends React.Component {
       transitionEnterTimeout={500}
       transitionLeaveTimeout={500}
       transitionName="movie-item">
-      {movies.map(item => (
+      {this.props.items.map(item => (
         <MovieItem
         key={item.id}
         item={item}
@@ -40,7 +34,6 @@ class MovieList extends React.Component {
         keyy={item.id}
         addFavorite={this.props.onStarClick}
         isFavorite={item.isFavorite}
-        //LÄGGA TILL YOOUTUBE LÄNK HÄR
         />
 
         ))}

@@ -1,24 +1,20 @@
-// @flow
-
 import React from 'react';
-
+import Searchbar from './Searchbar';
 import './css/Header.css';
 
-const Searchbar: () => React.Element<*> = ({ onChange }) => (
-  <input
-    className="searchbar" 
-    placeholder="Filter movies"
-    onChange={onChange} />
-);
 
-type Props = {
-  onSearchbarChange: (event: Object) => {},
-};
+class Header extends React.Component {
 
-const Header: (Props) => React.Element<*> = ({ onSearchbarChange }: Props) => (
-  <div className="header">
-    <Searchbar onChange={onSearchbarChange} />
-  </div>
-)
+  render() {
+
+    return (
+    <div className="header">
+    <Searchbar onChange={this.props.onSearchbarChange} />
+  	</div>
+  )
+ }
+
+}
+
 
 export default Header;
