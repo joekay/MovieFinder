@@ -9,7 +9,7 @@ import MovieItem from './MovieItem';
 import './css/MovieList.css';
 import './css/MovieItem.css';
 
-
+// Get URL for poster image
 const generateImageName = (url: string) =>
 `https://image.tmdb.org/t/p/w370${url}`
 
