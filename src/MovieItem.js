@@ -37,7 +37,7 @@ class MovieItem extends React.Component {
         trailers: result.results
       }))
     });
-
+    
   }
 
   // Toggle for Modal window
@@ -58,8 +58,7 @@ class MovieItem extends React.Component {
       starStyle = { backgroundImage : "url(./star.svg)" }
     }
       
-
-
+    
     return(
 
       <div 
@@ -67,10 +66,11 @@ class MovieItem extends React.Component {
       style={{ backgroundImage: `url(${this.props.image})`}}
       onClick={(e)=>{ if(e.target.className !== "favBtn") this.handleOpenModal() }}
       >
+      {this.props.user ? 
         <div 
           style={starStyle}         
           className="favBtn"
-          onClick={(e)=>{this.props.addFavorite(this.props.item)}} />
+          onClick={(e)=>{this.props.addFavorite(this.props.item)}} /> : null}
         <Modal isOpen={this.state.isOpen}
           style={customStyles}
           contentLabel="Popup"

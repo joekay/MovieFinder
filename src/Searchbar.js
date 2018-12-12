@@ -9,8 +9,6 @@ class Searchbar extends React.Component {
     className="searchbar"
     placeholder="Filter movies..."
     onChange={this.props.onChange} />
-
-
     )
 
    }

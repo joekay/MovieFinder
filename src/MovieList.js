@@ -11,7 +11,7 @@ import './css/MovieItem.css';
 
 // Get URL for poster image
 const generateImageName = (url: string) =>
-`https://image.tmdb.org/t/p/w370${url}`
+`https://image.tmdb.org/t/p/w300${url}`
 
 class MovieList extends React.Component {
 
@@ -34,6 +34,7 @@ class MovieList extends React.Component {
         keyy={item.id}
         addFavorite={this.props.onStarClick}
         isFavorite={item.isFavorite}
+        user={this.props.user}
         />
 
         ))}
