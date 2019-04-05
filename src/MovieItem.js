@@ -57,7 +57,6 @@ class MovieItem extends React.Component {
     } else {
       starStyle = { backgroundImage : "url(./star.svg)" }
     }
-      
     
     return(
 
@@ -75,8 +74,10 @@ class MovieItem extends React.Component {
           style={customStyles}
           contentLabel="Popup"
         >
-          <h2>{this.props.name}</h2>
-          <p>{this.props.overview}</p>
+          <h2>{this.props.item.title}</h2>
+          <p>Plot: {this.props.item.overview}</p>
+          <p>Release date: {this.props.item.release_date}</p>
+          <p>Vote average: {this.props.item.vote_average} ({this.props.item.vote_count} TMDB votes)</p>
 
           <iframe title="YouTube video player" className="youtube-player" type="text/html" 
           width="640" height="390" src="http://www.youtube.com/embed/${trailerObject.key}"

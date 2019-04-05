@@ -6,7 +6,7 @@ var region = '';
 // Api call to TMDB to get movies now playing in theatres
 const Api = {
   getList(): Promise<ApiResponse> {
-    const query = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=${language}${region}&apend_to_response=videos`;
+    const query = `https://api.themoviedb.org/3/movie/now_playing?api_key=${api_key}&language=${language}${region}&include_video=true`;
 
 
     return fetch(query)

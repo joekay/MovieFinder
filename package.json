@@ -12,6 +12,7 @@
     "react": "^15.5.3",
     "react-addons-css-transition-group": "^15.5.2",
     "react-dom": "^15.5.3",
+    "react-modal": "^3.8.1",
     "react-scripts": "^0.9.5",
     "whatwg-fetch": "^2.0.3"
   },

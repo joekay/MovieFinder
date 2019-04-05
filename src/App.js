@@ -36,17 +36,6 @@ type State = {
 
 class App extends React.Component {
 
-  // initial state
-  /*state: State = {
-    items: [],
-    favoriteItems: [],
-    syncedItems: [],
-    searchbarInput: '',
-    favorites: [],
-    user: null,
-    isLoggedin: false
-  }*/
-
   constructor(props) {
     super(props);
 
@@ -74,6 +63,8 @@ class App extends React.Component {
       this.setState({ user, isLoggedin: true, counter:1 })
     })
 
+    this.renderChoices();
+    console.log(datalist);
     counter++;
 
   }
@@ -107,55 +98,19 @@ class App extends React.Component {
   })*/}
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
 
-    //favItems = favItems.concat(datalist);
-    /*const sliced = datalist.slice
-    this.setState({
-      items: [...this.state.items, datalist]
-    })*/
+
     console.log(this.state.isLoggedin + " " + this.state.isSynced);
   if (this.state.isLoggedin == true && this.state.isSynced == false) {
     this.setState({isSynced: true});
     this.state.isSynced = true;
-        var user = firebase.auth().currentUser.uid;
-    var childData2 = this.state.syncedItems.slice();
-    var query = firebase.database().ref("users/" + user + "/").orderByKey();
-    query.once("value")
-    .then(function(snapshot) {
-      
-      snapshot.forEach(function(childSnapshot) {
-          // key will be "ada" the first time and "alan" the second time
-          var key = childSnapshot.key;
-          // childData will be the actual contents of the child
-          var childData = childSnapshot.val();
-          console.log(childData);
-
-          /*this.setState({
-            items: [...this.state.items, childData]
-          })*/
-
-          // Add item to it
-          //datalist = [...datalist, childData];
-          datalist.concat(childData);
-          console.log(datalist);
 
 
-
-        });
-
-    });
-
-    /*this.setState({
-            items: [...this.state.items, datalist]
-          })*/
-
-    console.log(this.state.items);
     let a = this.state.items.slice(); //creates the clone of the state
     let b = datalist.slice();
     this.setState({items: a.concat(b)});
-    console.log(this.state.items);
-    favItems.concat(datalist);
+    favItems = datalist;
   }
 
 
@@ -168,7 +123,7 @@ class App extends React.Component {
   }
 
   renderChoices = () => {
-    
+
     var user = firebase.auth().currentUser.uid;
     var childData2 = this.state.syncedItems.slice();
     var query = firebase.database().ref("users/" + user + "/").orderByKey();
@@ -180,7 +135,6 @@ class App extends React.Component {
           var key = childSnapshot.key;
           // childData will be the actual contents of the child
           var childData = childSnapshot.val();
-          console.log(childData);
 
           /*this.setState({
             items: [...this.state.items, childData]
@@ -194,9 +148,12 @@ class App extends React.Component {
     }.bind(this));
 
     counter++;
-
     console.log("tjena");
     console.log(datalist);
+    favItems = datalist;
+    console.log(favItems);
+
+
 
   }
 
@@ -250,17 +207,22 @@ addFavorite = (movie) => {
 
   render () {
 
-    /*if(this.state.isLoggedin && counter == 1){
-      this.renderChoices();
-
-    }*/
-
     // Filter items depending on searchbar input
     const filteredItems = this.state.items.filter(item => {
       return item.title.toLowerCase().indexOf(this.state.searchbarInput) >= 0;
     });
 
+    console.log(this.state.isLoggedin + " " + counter);
+
     if(this.state.isLoggedin && counter == 1){
+
+      this.renderChoices();
+      
+      console.log("HÄNDER JAG");
+      console.log(datalist);
+          let b = datalist.slice();
+    favItems = datalist;
+
 
     // Items that are favorites
     favItems = this.state.items.filter(item => {
@@ -270,14 +232,8 @@ addFavorite = (movie) => {
         return false;
     })
 
-    this.renderChoices();
-    //favItems = favItems.concat(datalist);
-
-    console.log(favItems);
-    console.log(this.state.comment);
 
     } else{
-
     favItems = this.state.items.filter(item => {
       if(item.isFavorite)
         return true;
@@ -286,14 +242,6 @@ addFavorite = (movie) => {
     })
 
     }
-    /*for(var i=0;i<datalist.length;i++){
-      for(var j=0;j<favItems.length;j++){
-        if(datalist[i].item.id == favItems[j].item.id){
-          console.log("Dublett");
-        }
-      }
-
-    }*/
 
     
 
@@ -309,8 +257,8 @@ addFavorite = (movie) => {
       {this.state.user ? `Signed in as ${this.state.user.displayName}!` : 'Please log in to add favorites.'}
       </p>
 
-      {this.state.isLoggedin===true && counter == 1 ? this.renderChoices(): console.log("HEJ2")}
       {console.log(favItems)}
+
 
       <button style={{width: '180px'}} onClick={()=>{ if(this.state.user == null){ this.login()} else {this.logout()} }}>
       {this.state.user==null ? "Log In with Facebook" : "Log Out"}
@@ -328,13 +276,12 @@ addFavorite = (movie) => {
       <div>
       <h1 style={{color: "white", display: 'flex',  justifyContent:'center', alignItems:'center'}}>{this.state.user ? `Favorites` : null}</h1>
       <div>
-      {this.state.isLoggedin && datalist != null ? 
         <MovieList 
         items={favItems} 
         onStarClick={(movie)=>this.removeFavorite(movie)} 
         user={this.state.user}
-        />  : null
-      }
+        />  
+      {console.log(favItems)}
       </div>
       </div>
 

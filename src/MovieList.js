@@ -28,9 +28,7 @@ class MovieList extends React.Component {
         <MovieItem
         key={item.id}
         item={item}
-        name={item.title}
         image={generateImageName(item.poster_path)}
-        overview={item.overview}
         keyy={item.id}
         addFavorite={this.props.onStarClick}
         isFavorite={item.isFavorite}
