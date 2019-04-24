@@ -38,7 +38,34 @@ class MovieList extends React.Component {
         ))}
         </ReactCSSTransitionGroup>
 
+      <h1 style={{color: "white", display: 'flex',  justifyContent:'center', alignItems:'center'}}>
+      {this.props.ID == 2 ? `Favorites` : 'Login to view favorites below'}</h1>
+
+      {this.props.favmovs ?
+
+              <ReactCSSTransitionGroup
+      transitionEnterTimeout={500}
+      transitionLeaveTimeout={500}
+      transitionName="movie-item">
+      {this.props.favmovs.map(item => (
+        <MovieItem
+        key={item.id}
+        item={item}
+        image={generateImageName(item.poster_path)}
+        keyy={item.id}
+        addFavorite={this.props.onStarClick}
+        isFavorite={item.isFavorite}
+        user={this.props.user}
+        />
+
+        ))}
+        </ReactCSSTransitionGroup> : null}
+
         </div>
+
+
+
+
         );
       }
 

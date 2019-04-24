@@ -53,6 +53,7 @@ class MovieItem extends React.Component {
     // Styling for the little star in the corner of each movie
     var starStyle = [];
     if(this.props.isFavorite){
+      console.log("TESTA LITE");
       starStyle = { backgroundImage : "url(./starFilled.svg)" }
     } else {
       starStyle = { backgroundImage : "url(./star.svg)" }
@@ -78,10 +79,6 @@ class MovieItem extends React.Component {
           <p>Plot: {this.props.item.overview}</p>
           <p>Release date: {this.props.item.release_date}</p>
           <p>Vote average: {this.props.item.vote_average} ({this.props.item.vote_count} TMDB votes)</p>
-
-          <iframe title="YouTube video player" className="youtube-player" type="text/html" 
-          width="640" height="390" src="http://www.youtube.com/embed/${trailerObject.key}"
-          frameBorder="0" allowFullScreen></iframe>
           
           <button onClick={this.handleOpenModal}>close</button>
 

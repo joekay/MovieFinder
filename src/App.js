@@ -4,6 +4,7 @@ import MovieList from './MovieList';
 import Api from './Api';
 import './css/App.css';
 import firebase from 'firebase'
+import { connect } from 'react-redux'
 
 const config = {
   apiKey: "AIzaSyA1d9vZltW10aoImVaEWBPV5H8pFho2wDg",
@@ -56,16 +57,30 @@ class App extends React.Component {
     this.renderChoices = this.renderChoices.bind(this);
 }
 
-  login = () => {
-
+async fbLogin(){
     auth().signInWithPopup(provider)
     .then(({ user }) => {
       this.setState({ user, isLoggedin: true, counter:1 })
     })
+}
 
-    this.renderChoices();
+  async login() {
+
+    const test =  await auth().signInWithPopup(provider)
+
+    .then(({ user }) => {
+      this.setState(prevState => ({ user, isLoggedin: true, counter: 1, favKey: 1 }),
+       this.renderChoices)
+    })
+
+    const theFavs = this.state.syncedItems.map(l => Object.assign({}, l));
     console.log(datalist);
+    console.log(this.state.syncedItems);
+    //this.setState(prevState => ({ syncedItems }));
+
     counter++;
+
+ 
 
   }
 
@@ -100,7 +115,6 @@ class App extends React.Component {
 
   componentDidUpdate() {
 
-
     console.log(this.state.isLoggedin + " " + this.state.isSynced);
   if (this.state.isLoggedin == true && this.state.isSynced == false) {
     this.setState({isSynced: true});
@@ -110,7 +124,6 @@ class App extends React.Component {
     let a = this.state.items.slice(); //creates the clone of the state
     let b = datalist.slice();
     this.setState({items: a.concat(b)});
-    favItems = datalist;
   }
 
 
@@ -122,7 +135,7 @@ class App extends React.Component {
     console.log(this.state.user);
   }
 
-  renderChoices = () => {
+  async renderChoices () {
 
     var user = firebase.auth().currentUser.uid;
     var childData2 = this.state.syncedItems.slice();
@@ -214,7 +227,7 @@ addFavorite = (movie) => {
 
     console.log(this.state.isLoggedin + " " + counter);
 
-    if(this.state.isLoggedin && counter == 1){
+    if(this.state.isLoggedin && counter == 4){
 
       this.renderChoices();
       
@@ -231,16 +244,19 @@ addFavorite = (movie) => {
       else
         return false;
     })
+    console.log(favItems);
 
 
     } else{
     favItems = this.state.items.filter(item => {
-      if(item.isFavorite)
+      if(item.isFavorite){
+        console.log(item);
         return true;
+      }
       else
         return false;
     })
-
+    console.log(favItems);
     }
 
     
@@ -295,4 +311,8 @@ addFavorite = (movie) => {
 
   }
 
-  export default App;
+const mapStateToProps = (state) => ({
+  
+})
+
+  export default connect(mapStateToProps)(App);
